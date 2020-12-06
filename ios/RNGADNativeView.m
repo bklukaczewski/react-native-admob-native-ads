@@ -22,6 +22,7 @@ NSString *adUnitId;
 NSNumber *refreshingInterval;
 NSNumber *delay;
 NSNumber *adChoicesPlace;
+NSNumber *mediaAspectRatio;
 BOOL *nonPersonalizedAds;
 
 
@@ -39,6 +40,11 @@ BOOL *nonPersonalizedAds;
 - (void)setAdChoicesPlacement:(NSNumber *)adChoicesPlacement {
     
     adChoicesPlace = adChoicesPlacement;
+}
+
+- (void)setMediaAspectRatio:(NSNumber *)aspectRatio {
+
+    mediaAspectRatio = aspectRatio;
 }
 
 - (void)setRequestNonPersonalizedAdsOnly:(BOOL *)requestNonPersonalizedAdsOnly {
@@ -238,7 +244,7 @@ BOOL *nonPersonalizedAds;
     UIViewController *rootViewController = [keyWindow rootViewController];
     
     GADNativeAdViewAdOptions *adViewOptions = [GADNativeAdViewAdOptions new];
-    
+    GADNativeAdMediaAdLoaderOptions *adMediaOptions = [GADNativeAdMediaAdLoaderOptions new];
     
     if ([adChoicesPlace isEqualToNumber:@0]) {
         [adViewOptions setPreferredAdChoicesPosition:GADAdChoicesPositionTopLeftCorner];
@@ -253,7 +259,19 @@ BOOL *nonPersonalizedAds;
         
     }
     
-    
+    if ([mediaAspectRatio isEqualToNumber:@0]) {
+    [adMediaOptions setMediaAspectRatio:GADMediaAspectRatioUnknown];
+    } else if ([mediaAspectRatio isEqualToNumber:@1]) {
+        [adMediaOptions setMediaAspectRatio:GADMediaAspectRatioAny];
+    } else if ([mediaAspectRatio isEqualToNumber:@2]) {
+        [adMediaOptions setMediaAspectRatio:GADMediaAspectRatioLandscape];
+    } else if ([mediaAspectRatio isEqualToNumber:@3]) {
+        [adMediaOptions setMediaAspectRatio:GADMediaAspectRatioPortrait];
+    } else if ([mediaAspectRatio isEqualToNumber:@4]) {
+        [adMediaOptions setMediaAspectRatio:GADMediaAspectRatioSquare];
+    } else {
+        [adMediaOptions setMediaAspectRatio:GADMediaAspectRatioUnknown];
+    }
     
     
     
@@ -261,7 +279,7 @@ BOOL *nonPersonalizedAds;
                      initWithAdUnitID:adUnitId
                      rootViewController:rootViewController
                      adTypes:@[ kGADAdLoaderAdTypeUnifiedNative ]
-                     options:@[adViewOptions]];
+                     options:@[ adMediaOptions, adViewOptions ]];
     
     
     self.adLoader.delegate = self;

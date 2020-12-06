@@ -41,6 +41,7 @@ RCT_EXPORT_VIEW_PROPERTY(starrating, NSNumber)
 RCT_EXPORT_VIEW_PROPERTY(callToAction, NSNumber)
 RCT_EXPORT_VIEW_PROPERTY(requestNonPersonalizedAdsOnly, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(adChoicesPlacement, NSNumber)
+RCT_EXPORT_VIEW_PROPERTY(mediaAspectRatio, NSNumber)
 
 
 //RCT_EXPORT_VIEW_PROPERTY(ratingStarsColor, NSString)

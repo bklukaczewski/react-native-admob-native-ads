@@ -15,6 +15,7 @@ import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.MediaAspectRatio;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,7 +52,7 @@ public class RNAdMobNativeViewManager extends ViewGroupManager<RNNativeAdWrapper
     public static final String PROP_STAR_RATING_VIEW = "starrating";
     public static final String PROP_AD_CHOICES_PLACEMENT = "adChoicesPlacement";
     public static final String PROP_NON_PERSONALIZED_ADS = "requestNonPersonalizedAdsOnly";
-
+    public static final String PROP_MEDIA_ASPECT_RATIO = "mediaAspectRatio";
 
     @javax.annotation.Nullable
     @Override
@@ -118,6 +119,11 @@ public class RNAdMobNativeViewManager extends ViewGroupManager<RNNativeAdWrapper
         nativeAdWrapper.setAdChoicesPlacement(location);
     }
 
+    @ReactProp(name = PROP_MEDIA_ASPECT_RATIO)
+    public void setPropMediaAspectRatio(final RNNativeAdWrapper nativeAdWrapper, final int aspectRatio) {
+
+        nativeAdWrapper.setMediaAspectRatio(aspectRatio);
+    }
 
     @ReactProp(name = PROP_DELAY_AD_LOAD)
     public void setPropDelayAdLoad(final RNNativeAdWrapper nativeAdWrapper, final int delay) {
@@ -206,7 +212,6 @@ public class RNAdMobNativeViewManager extends ViewGroupManager<RNNativeAdWrapper
             nativeAdWrapper.nativeAdView.setCallToActionView(view);
 
     }
-
 
     @ReactProp(name = PROP_TEST_DEVICES)
     public void setPropTestDevices(final RNNativeAdWrapper nativeAdWrapper, final ReadableArray testDevices) {

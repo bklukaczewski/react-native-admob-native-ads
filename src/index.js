@@ -78,11 +78,9 @@ export class NativeAdView extends Component {
   };
 
   updateAd() {
-    if (this.componentMounted) {
-      this.setState({
-        nativeAd: this.ad,
-      });
-    }
+    this.setState({
+      nativeAd: this.ad,
+    });
   }
 
   componentDidMount() {
@@ -133,6 +131,11 @@ export class NativeAdView extends Component {
           adChoicesPlacement={
             this.props.adChoicesPlacement > -1
               ? this.props.adChoicesPlacement
+              : 1
+          }
+          mediaAspectRatio={
+            this.props.mediaAspectRatio > -1
+              ? this.props.mediaAspectRatio
               : 1
           }
         >

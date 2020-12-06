@@ -22,6 +22,7 @@ import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MediaAspectRatio;
 import com.google.android.gms.ads.VideoOptions;
 import com.google.android.gms.ads.formats.MediaView;
 import com.google.android.gms.ads.formats.NativeAdOptions;
@@ -52,6 +53,7 @@ public class RNNativeAdWrapper extends LinearLayout {
     String messagingModuleName;
 
     private int adChoicesPlacement = 1;
+    private int mediaAspectRatio = MediaAspectRatio.ANY;
     private boolean requestNonPersonalizedAdsOnly = false;
 
 
@@ -331,6 +333,7 @@ public class RNNativeAdWrapper extends LinearLayout {
             NativeAdOptions adOptions = new NativeAdOptions.Builder()
                     .setVideoOptions(videoOptions)
                     .setAdChoicesPlacement(adChoicesPlacement)
+                    .setMediaAspectRatio(mediaAspectRatio)
                     .build();
             builder.withNativeAdOptions(adOptions);
 
@@ -389,6 +392,10 @@ public class RNNativeAdWrapper extends LinearLayout {
 
     public void setAdChoicesPlacement(int location) {
         adChoicesPlacement = location;
+    }
+
+    public void setMediaAspectRatio(int aspectRatio) {
+        mediaAspectRatio = aspectRatio;
     }
 
     public void setRequestNonPersonalizedAdsOnly(boolean npa) {

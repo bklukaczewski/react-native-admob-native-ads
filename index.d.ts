@@ -75,6 +75,13 @@ type options = {
     TOP_RIGHT: number,
     BOTTOM_RIGHT: number,
     BOTTOM_LEFT: number
+  },
+  mediaAspectRatio: {
+    UNKNOWN: number;
+    ANY: number;
+    LANDSCAPE: number;
+    PORTRAIT: number;
+    SQUARE: number;
   }
 }
 /**
@@ -114,9 +121,10 @@ type NativeAdViewProps = {
   /**
    * Ad Unit ID for Native ads. Remember to use only test-ids during
    * development mode or add your device to testDevices.
+   * Set to null when using with enableTestMode.
    */
 
-  adUnitID: string;
+  adUnitID: string | null;
 
   /**
    * Time after which a new ad should be
@@ -140,13 +148,16 @@ type NativeAdViewProps = {
    * import AdOptions then pass the value from there. AdOptions.adChoicesPlacement
    */
 
-  adChoicesPlacement?: {
-    TOP_LEFT: number,
-    TOP_RIGHT: number,
-    BOTTOM_RIGHT: number,
-    BOTTOM_LEFT: number
-  }
+  adChoicesPlacement?: number;
 
+  /**
+   * This sets the aspect ratio for image or video to be returned for the native ad.
+   * Setting mediaAspectRatio to one of the following constants will cause only ads with media
+   * of the specified aspect ratio to be returned:
+   *
+   * import AdOptions then pass the value from there. AdOptions.mediaAspectRatio
+   */
+  mediaAspectRatio?: number;
   /**
    * Under the Google EU User Consent Policy, you must make certain disclosures
    * to your users in the European Economic Area (EEA) and obtain their consent
@@ -172,7 +183,7 @@ type NativeAdViewProps = {
   onAdImpression?: Function<void>;
   onAdClicked?: Function<void>;
   onAdLoaded?: Function<void>;
-  onUnifiedNativeAdLoaded?: (event: NativeAd) => {};
+  onUnifiedNativeAdLoaded?: (ad: NativeAd) => void;
   onAdFailedToLoad?: Function<void>;
 };
 
